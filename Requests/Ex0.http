@@ -1,0 +1,12 @@
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+    "name": "Ex0",
+    "port": 4550,
+    "protocol": "http"
+}
+
+###
+GET http://localhost:4550/imposters
+Content-Type: application/json

@@ -1,0 +1,42 @@
+POST http://localhost:2525/imposters
+content-Type: application/json
+
+{
+    "name": "Ex2",
+    "port": 4552,
+    "protocol": "http",
+    "stubs": [{
+        "responses": [{
+            "is": {
+                "statusCode": 200,
+                "body": {
+                    "Marca": ["Ford",
+                              "BMW",
+                              "Audi",
+                              "Volvo",
+                              "Toyota"]
+                }
+            }
+        }],
+        "predicates":[{
+            "and": [
+                {
+                "equals": {
+                    "path": "/api/marcas",
+                    "method": "GET",
+                    "headers": { "Content-Type": "application/json" }
+                }
+                },
+                {
+                "not": {
+                    "contains": { "body": "requiredField" },
+                    "caseSensitive": true
+                }
+                }
+            ]
+        }]
+    }]
+}
+
+###
+
