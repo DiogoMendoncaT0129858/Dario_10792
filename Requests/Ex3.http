@@ -2,15 +2,15 @@ POST http://localhost:2525/imposters
 content-Type: application/json
 
 {
-    "name": "Ex2",
-    "port": 4552,
+    "name": "Ex3",
+    "port": 4553,
     "protocol": "http",
     "stubs": [{
         "responses": [{
             "is": {
                 "statusCode": 200,
                 "body": {
-                    "marcas": "Toyota"
+                    "marcas": []
                 }
             }
         }],
@@ -36,6 +36,5 @@ content-Type: application/json
 }
 
 ###
-GET http://localhost:4552/api/carros?marcas=Toyota
+GET http://localhost:4553/api/carros?marcas=Toyota
 Content-Type: application/json
-

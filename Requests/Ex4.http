@@ -2,15 +2,16 @@ POST http://localhost:2525/imposters
 content-Type: application/json
 
 {
-    "name": "Ex2",
-    "port": 4552,
+    "name": "Ex4",
+    "port": 4554,
     "protocol": "http",
     "stubs": [{
         "responses": [{
             "is": {
                 "statusCode": 200,
                 "body": {
-                    "marcas": "Toyota"
+                    "credential": ["username": "Admin",
+                                   "password": "secret"]
                 }
             }
         }],
@@ -18,10 +19,10 @@ content-Type: application/json
             "and": [
                 {
                 "equals": {
-                    "path": "/api/carros",
-                    "method": "GET",
+                    "path": "/api/login",
+                    "method": "POST",
                     "headers": { "Content-Type": "application/json" },
-                    "query": { "marcas": "Toyota" }
+                    "query": { }
                 }
                 },
                 {
@@ -36,6 +37,5 @@ content-Type: application/json
 }
 
 ###
-GET http://localhost:4552/api/carros?marcas=Toyota
+GET http://localhost:4553/api/carros
 Content-Type: application/json
-
