@@ -1,0 +1,70 @@
+POST http://localhost:2525/imposters
+content-Type: application/json
+
+{
+    "name": "Ex5",
+    "port": 4555,
+    "protocol": "http",
+    "stubs": [{
+        "responses": [{
+            "is": {
+                "statusCode": 200,
+                "headers": { "Content-Type": "application/json" },
+                "body": {
+                    "status": "Ok",
+                    "token": "validtoken"
+                }
+            }
+        }],
+        "predicates": [
+                {
+                    "equals": {
+                        "path": "/api/login",
+                        "method": "POST",
+                        "headers": { "Content-Type": "application/json" }
+                    }
+                },
+                {
+                    "deepEquals": {
+                        "body": { 
+                            "username": "admin",
+                            "password": "secret"
+                        }
+                    }
+                }
+        ],
+        "responses": [{
+            "is": {
+                "statusCode": 401,
+                "headers": { "Content-Type": "application/json" },
+                "body": {
+                    "status": "Incorrect",
+                    "token": "Invalid Token"
+                }
+            }
+        }],
+    }]
+}
+
+
+### Correct Request
+GET http://localhost:4555/api/login
+Content-Type: application/json
+
+{ 
+  "username": "admin", 
+  "password": "secret" 
+}
+
+### Wrong Request
+GET http://localhost:4555/api/login
+Content-Type: application/json
+
+{ 
+  "username": "notAdmin", 
+  "password": "Public" 
+}
+
+###
+DELETE http://localhost:2525/imposters/4555
+Content-Type: application/json

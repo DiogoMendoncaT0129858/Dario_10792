@@ -20,8 +20,7 @@ content-Type: application/json
                 "equals": {
                     "path": "/api/carros",
                     "method": "GET",
-                    "headers": { "Content-Type": "application/json" },
-                    "query": { "marcas": "Toyota" }
+                    "headers": { "Content-Type": "application/json" }
                 }
                 },
                 {
@@ -36,5 +35,5 @@ content-Type: application/json
 }
 
 ###
-GET http://localhost:4553/api/carros?marcas=Toyota
+GET http://localhost:4553/api/carros
 Content-Type: application/json
