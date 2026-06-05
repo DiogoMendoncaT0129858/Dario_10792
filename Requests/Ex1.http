@@ -10,7 +10,7 @@ Content-Type: application/json
             "is": {
                 "statusCode": 200,
                 "body": {
-                    "Marca": ["Ford",
+                    "marcas": ["Ford",
                               "BMW",
                               "Audi",
                               "Volvo"]
@@ -39,5 +39,9 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:4551/imposters
+GET http://localhost:4551/api/marcas
+Content-Type: application/json
+
+###
+DELETE http://localhost:2525/imposters/4551
 Content-Type: application/json

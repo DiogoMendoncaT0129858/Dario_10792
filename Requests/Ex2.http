@@ -10,7 +10,20 @@ content-Type: application/json
             "is": {
                 "statusCode": 200,
                 "body": {
-                    "marcas": "Toyota"
+                    "cars" {
+                        "brand": {
+                            "Toyota": [
+                                0,
+                                "Fuzzy",
+                                300
+                            ],
+                            "BMW": [
+                                1,
+                                "Starlight",
+                                400
+                            ]
+                            
+                    }
                 }
             }
         }],
@@ -21,7 +34,9 @@ content-Type: application/json
                     "path": "/api/carros",
                     "method": "GET",
                     "headers": { "Content-Type": "application/json" },
-                    "query": { "marcas": "Toyota" }
+                    "query": {
+                        "brand": "Toyota"
+                    }
                 }
                 },
                 {
@@ -36,6 +51,10 @@ content-Type: application/json
 }
 
 ###
-GET http://localhost:4552/api/carros?marcas=Toyota
+GET http://localhost:4552/api/carros?brand=Toyota
 Content-Type: application/json
 
+
+###
+DELETE http://localhost:2525/imposters/4552
+Content-Type: application/json

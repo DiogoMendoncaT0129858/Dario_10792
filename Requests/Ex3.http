@@ -10,7 +10,10 @@ content-Type: application/json
             "is": {
                 "statusCode": 200,
                 "body": {
-                    "marcas": []
+                    "cars": [
+                        "BMW",
+                        "Toyota"
+                    ]
                 }
             }
         }],
@@ -18,9 +21,12 @@ content-Type: application/json
             "and": [
                 {
                 "equals": {
-                    "path": "/api/carros",
+                    "path": "/api/cars",
                     "method": "GET",
-                    "headers": { "Content-Type": "application/json" }
+                    "headers": { "Content-Type": "application/json" },
+                    "query": {
+                        "cars"
+                    }
                 }
                 },
                 {
@@ -30,10 +36,15 @@ content-Type: application/json
                 }
                 }
             ]
-        }]
+        }],
     }]
 }
 
 ###
-GET http://localhost:4553/api/carros
+GET http://localhost:4553/api/cars?cars=Toyota
+Content-Type: application/json
+
+
+###
+DELETE http://localhost:2525/imposters/4553
 Content-Type: application/json
