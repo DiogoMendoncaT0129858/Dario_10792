@@ -10,19 +10,11 @@ content-Type: application/json
             "is": {
                 "statusCode": 200,
                 "body": {
-                    "cars" {
-                        "brand": {
-                            "Toyota": [
-                                0,
-                                "Fuzzy",
-                                300
-                            ],
-                            "BMW": [
-                                1,
-                                "Starlight",
-                                400
-                            ]
-                            
+                    "brand": "Toyota",
+                    "details": {
+                        "ID": 1,
+                        "Model": "Super",
+                        "Price": 400
                     }
                 }
             }

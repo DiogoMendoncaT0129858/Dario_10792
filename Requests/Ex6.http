@@ -1,0 +1,75 @@
+POST http://localhost:2525/imposters
+content-Type: application/json
+
+{
+   "name":"Ex6",
+   "port":4556,
+   "protocol":"http",
+   "stubs":[
+      {
+         "responses":[
+            {
+               "is":{
+                  "statusCode":200,
+                  "headers":{
+                     "Content-Type":"application/json"
+                  },
+                  "body":{
+                     "status":"Ok",
+                     "token":"validEmail"
+                  }
+               }
+            }
+         ],
+        "predicates": [{
+                "deepEquals": {
+                    "path": "/api/users",
+                    "method": "POST",
+                    "body": {
+                        "email": "exists@gmail.not",
+                        "email2": "notexists@gmael.nut"
+                    }
+            },
+            "caseSensitive": true
+        }],
+        "responses":[
+            {
+               "is":{
+                  "statusCode":409,
+                  "headers":{
+                     "Content-Type":"application/json"
+                  },
+                  "body":{
+                     "status":"Error",
+                     "token":"Email_Exists: Email already exists"
+                  }
+               }
+            }
+         ],
+        "predicates": [{
+                "deepEquals": {
+                    "path": "/api/users",
+                    "method": "POST",
+                    "body": {
+                        "email": "exists@gmail.not",
+                        "email2": "exists@gmail.not"
+                    }
+            },
+            "caseSensitive": true
+        }]
+      }
+   ]
+}
+
+###
+POST http://localhost:4556/api/users
+Content-Type: application/json
+
+{
+    "email": "exists@gmail.not",
+    "email2": "exists@gmail.not"
+}
+
+###
+DELETE http://localhost:2525/imposters/4556
+Content-Type: application/json

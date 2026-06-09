@@ -6,44 +6,81 @@ content-Type: application/json
     "port": 4553,
     "protocol": "http",
     "stubs": [{
-        "responses": [{
-            "is": {
-                "statusCode": 200,
-                "body": {
-                    "cars": [
-                        "BMW",
-                        "Toyota"
-                    ]
-                }
+        "responses": [
+            {
+               "is": {
+                  "statusCode": 200,
+                  "headers": { "Content-Type": "application/json" },
+                  "body": {
+                     "brand": "Toyota",
+                     "details": {
+                        "id": 1,
+                        "model": "Super",
+                        "Price": 400
+                     }
+                  }
+               }
             }
-        }],
-        "predicates":[{
-            "and": [
-                {
-                "equals": {
-                    "path": "/api/cars",
-                    "method": "GET",
-                    "headers": { "Content-Type": "application/json" },
-                    "query": {
-                        "cars"
+         ],
+         "predicates": [
+            {
+               "equals": {
+                  "path": "/api/cars",
+                  "method": "GET",
+                  "query": { 
+                    "brand": "Toyota" 
                     }
-                }
-                },
-                {
-                "not": {
-                    "contains": { "body": "requiredField" },
-                    "caseSensitive": true
-                }
-                }
-            ]
-        }],
-    }]
+               }
+            },
+            {
+               "not": {
+                  "contains": { "body": "requiredField" },
+                  "caseSensitive": true
+               }
+            }
+         ]
+      },
+      {
+         "responses": [
+            {
+               "is": {
+                  "statusCode": 400,
+                  "headers": { "Content-Type": "application/json" },
+                  "body": {
+                     "details": "NULL"
+                  }
+               }
+            }
+         ],
+         "predicates": [
+            {
+               "equals": {
+                  "path": "/api/cars",
+                  "method": "GET"
+               }
+            },
+            {
+               "not": {
+                  "contains": { "body": "requiredField" },
+                  "caseSensitive": true
+               }
+            }
+         ]
+      }
+   ]
 }
 
 ###
-GET http://localhost:4553/api/cars?cars=Toyota
+GET http://localhost:4553/api/cars?brand=Toyota
 Content-Type: application/json
 
+{"optionalField": true} 
+
+###
+GET http://localhost:4553/api/cars?cars=BMW
+Content-Type: application/json
+
+{"optionalField": true}
 
 ###
 DELETE http://localhost:2525/imposters/4553

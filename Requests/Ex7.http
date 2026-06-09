@@ -2,8 +2,8 @@ POST http://localhost:2525/imposters
 content-Type: application/json
 
 {
-   "name":"Ex4",
-   "port":4554,
+   "name":"Ex7",
+   "port":4557,
    "protocol":"http",
    "stubs":[
       {
@@ -16,35 +16,35 @@ content-Type: application/json
                   },
                   "body":{
                      "status":"Ok",
-                     "token":"validtoken"
+                     "token":"validEmail"
                   }
                }
             }
          ],
         "predicates": [{
                 "deepEquals": {
-                    "path": "/api/login",
+                    "path": "/api/users",
                     "method": "POST",
                     "body": {
-                        "username": "admin",
-                        "password": "secret"
+                        "email": "exists@gmail.not",
+                        "email2": "notexists@gmael.nut"
                     }
             },
             "caseSensitive": true
-        }]
+        }],
       }
    ]
 }
 
 ###
-POST http://localhost:4554/api/login
+POST http://localhost:4557/api/users
 Content-Type: application/json
 
 {
-"username": "admin",
-"password": "secret"
+    "email": "exists@gmail.not",
+    "email2": "notexists@gmael.nut"
 }
 
 ###
-DELETE http://localhost:2525/imposters/4554
+DELETE http://localhost:2525/imposters/4557
 Content-Type: application/json
