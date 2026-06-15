@@ -1,0 +1,87 @@
+POST http://localhost:2525/imposters
+content-Type: application/json
+
+{
+   "name":"Ex12",
+   "port":4562,
+   "protocol":"http",
+   "stubs": [
+  {
+    "responses": [
+      {
+        "is": {
+          "statusCode": 200,
+          "headers": { "Content-Type": "application/json" },
+          "body": { 
+            "token": "Valid",
+            "expires_in": "10 min"
+            }
+        }
+      }
+    ],
+    "predicates": [
+      {
+        "deepEquals": {
+          "path": "/api/auth",
+          "method": "POST",
+          "body": { 
+            "username": "user1", 
+            "password": "pass1" 
+            }
+        }
+      }
+    ]
+  },
+  {
+    "responses": [
+      {
+        "is": {
+          "statusCode": 401,
+          "headers": { "Content-Type": "application/json" },
+          "body": { 
+            "token": "Error",
+            "expires_in": "Already Expired"
+            }
+        }
+      }
+    ],
+    "predicates": [
+      {
+        "deepEquals": {
+          "path": "/api/auth",
+          "method": "POST",
+          "body": { 
+            "username": "YusereUm", 
+            "password": "PasseUm" 
+            }
+        }
+      }
+    ]
+  }
+]
+}
+
+
+
+###
+POST http://localhost:4562/api/auth
+Content-Type: application/json
+
+{ 
+    "username": "user1", 
+    "password": "pass1" 
+}
+
+###
+POST http://localhost:4562/api/auth
+Content-Type: application/json
+
+{ 
+    "username": "YusereUm", 
+    "password": "PasseUm" 
+}
+
+
+###
+DELETE http://localhost:2525/imposters/4562
+Content-Type: application/json

@@ -1,0 +1,43 @@
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "name": "Ex14",
+  "port": 4564,
+  "protocol": "http",
+  "stubs": [
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 415,
+            "headers": { "Content-Type": "application/json" },
+            "body": {
+              "error": "Unsupported media type",
+              "message": "'Content-Type: application/json' é obrigatório."
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": { 
+            "method": "POST" 
+            },
+          "not": {
+            "equals": {
+              "headers": { "Content-Type": "application/json" }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+###
+POST http://localhost:4564/api/login
+Content-Type: text/plain
+
+###
+POST http://localhost:4564/api/qualquer
