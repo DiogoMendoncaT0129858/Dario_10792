@@ -1,0 +1,50 @@
+POST http://localhost:2525/imposters
+content-Type: application/json
+
+{
+   "name":"Ex10",
+   "port":4560,
+   "protocol":"http",
+   "stubs":[
+      {
+         "responses":[
+            {
+               "is":{
+                  "statusCode": 409,
+                  "headers":{
+                     "Content-Type":"application/json",
+                     "Location":"/api/tasks"
+                  },
+                  "body":{
+                     "title": "duplicate"
+                  }
+               }
+            }
+         ],
+         "predicates":[
+            {
+               "equals":{
+                  "path":"/api/tasks",
+                  "method":"POST",
+                  "body":{
+                     "title": "duplicate"
+                  }
+               },
+               "caseSensitive":true
+            }
+         ]
+      }
+   ]
+}
+
+###
+POST http://localhost:4560/api/tasks
+Content-Type: application/json
+
+{
+"title": "duplicate"
+}
+
+###
+DELETE http://localhost:2525/imposters/4560
+Content-Type: application/json

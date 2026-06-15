@@ -2,22 +2,21 @@ POST http://localhost:2525/imposters
 content-Type: application/json
 
 {
-   "name":"Ex7",
-   "port":4557,
+   "name":"Ex9",
+   "port":4559,
    "protocol":"http",
    "stubs":[
       {
          "responses":[
             {
                "is":{
-                  "statusCode":201,
+                  "statusCode": 201,
                   "headers":{
                      "Content-Type":"application/json",
-                     "Location":"/api/users/1"
+                     "Location":"/api/temperature"
                   },
                   "body":{
-                     "status":"Created Succesfully",
-                     "token":"Welcome!"
+                     "status":"Created"
                   }
                }
             }
@@ -25,17 +24,17 @@ content-Type: application/json
          "predicates":[
             {
                "equals":{
-                  "path":"/api/users/1",
+                  "path":"/api/temperature",
                   "method":"POST"
                },
                "caseSensitive":true
             },
             {
-               "not":{
-                  "contains":{
-                     "body":{
-                        "email":"exists@gmail.not"
-                     }
+               "contains":{
+                  "body":{
+                     "value":"34",
+                     "sensor_id": "1"
+
                   }
                }
             }
@@ -45,16 +44,14 @@ content-Type: application/json
 }
 
 ###
-POST http://localhost:4557/api/users/1
+POST http://localhost:4559/api/temperature
 Content-Type: application/json
 
 {
-   "email": "exi@gmail.not",
-   "username": "admin",
-   "idade": "22"
-
+    "value": "34",
+    "sensor_id": "1"
 }
 
 ###
-DELETE http://localhost:2525/imposters/4557
+DELETE http://localhost:2525/imposters/4559
 Content-Type: application/json
