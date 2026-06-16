@@ -15,7 +15,8 @@ Content-Type: application/json
             "body": {
               "username": "user1",
               "email": "exists@gmail.not",
-              "role": "admin"
+              "role": "admin",
+              "token": "valid"
             }
           }
         }
@@ -60,9 +61,12 @@ GET http://localhost:4563/api/profile
 authorization: Bearer validtoken
 
 ###
-
 GET http://localhost:4563/api/profile
 
 ###
 GET http://localhost:4563/api/profile
 authorization: Bearer tokeninvalido
+
+###
+DELETE http://localhost:2525/imposters/4563
+Content-Type: application/json

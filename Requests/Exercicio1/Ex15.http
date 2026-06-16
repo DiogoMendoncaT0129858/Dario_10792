@@ -1,0 +1,40 @@
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "name": "Ex15",
+  "port": 4565,
+  "protocol": "http",
+  "stubs": [
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 404,
+            "headers": { 
+                "Content-Type": "application/json" 
+            },
+            "body": {
+              "error": "not found"
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": { 
+            
+            "method": "GET" 
+            }
+        }
+      ]
+    }
+  ]
+}
+
+###
+GET http://localhost:4565/ipa/kdi
+
+###
+DELETE http://localhost:2525/imposters/4565
+Content-Type: application/json
