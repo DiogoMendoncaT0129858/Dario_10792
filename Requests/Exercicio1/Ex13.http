@@ -11,7 +11,8 @@ Content-Type: application/json
         {
           "is": {
             "statusCode": 200,
-            "headers": { "Content-Type": "application/json" },
+            "headers": { "Content-Type": "application/json",
+                          "authorization": "Bearer login.response.body.token"},
             "body": {
               "username": "user1",
               "email": "exists@gmail.not",
@@ -26,7 +27,7 @@ Content-Type: application/json
           "equals": {
             "path": "/api/profile",
             "method": "GET",
-            "headers": { "authorization": "Bearer validtoken" }
+            "headers": { "authorization": "Bearer login.response.body.token" }
           }
         }
       ]
@@ -58,7 +59,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:4563/api/profile
-authorization: Bearer validtoken
+authorization: Bearer login.response.body.token
 
 ###
 GET http://localhost:4563/api/profile

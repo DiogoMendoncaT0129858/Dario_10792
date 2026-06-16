@@ -64,6 +64,7 @@ content-Type: application/json
 
 
 ###
+# @name login
 POST http://localhost:4562/api/auth
 Content-Type: application/json
 
