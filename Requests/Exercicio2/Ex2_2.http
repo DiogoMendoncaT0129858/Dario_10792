@@ -1,0 +1,281 @@
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "name":"Ex2_2",
+  "port":4572,
+  "protocol":"http",
+  "stubs": [
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "Invalid Value"
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja",
+            "method": "POST"
+          }
+        },
+        {
+          "equals": {
+            "body": {
+              "quant": -5
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "mensagem": "Produto Added Succesfully",
+              "id": 3
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja",
+            "method": "POST"
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": [
+              {
+                "id": 1,
+                "nome": "Camisola de um youtuber popular",
+                "price": 79.99,
+                "quant": 10
+              },
+              {
+                "id": 2,
+                "nome": "Super Tux 4 Deluxe Edition",
+                "price": 19.99,
+                "quant": 0
+              }
+            ]
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja",
+            "method": "GET"
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+                "id": 1,
+                "nome": "Camisola de um youtuber popular",
+                "price": 79.99,
+                "quant": 10
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja/1",
+            "method": "GET"
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "mensagem": "Stock updated",
+              "newQuant": 15
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja/1/stock",
+            "method": "PUT"
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 404,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "erro": "Product Dosent Exist"
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "contains": {
+            "path": "/api/lolja/999"
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "mensagem": "Non Exisiting Product Removed"
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja/2",
+            "method": "DELETE"
+          }
+        }
+      ]
+    },
+
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "erro": "Impossible to remove, product is still in-use"
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/api/lolja/1",
+            "method": "DELETE"
+          }
+        }
+      ]
+    }
+  ]
+}
+
+###
+GET http://localhost:4572/api/lolja
+Content-Type: application/json
+
+###
+GET http://localhost:4572/api/lolja/1
+Content-Type: application/json
+
+
+###
+POST http://localhost:4572/api/lolja
+Content-Type: application/json
+
+{
+  "nome":"monitor",
+  "price":149.99,
+  "quant":-5
+}
+
+
+###
+POST http://localhost:4572/api/lolja
+Content-Type:application/json
+
+{
+  "nome":"monitor",
+  "price":149.99,
+  "quant":20
+}
+
+
+###
+PUT http://localhost:4572/api/lolja/1/stock
+Content-Type: application/json
+
+{
+  "quant":5
+}
+
+
+###
+GET http://localhost:4572/api/lolja/999
+Content-Type: application/json
+
+
+###
+DELETE http://localhost:4572/api/lolja/1
+Content-Type: application/json
+
+
+###
+DELETE http://localhost:4572/api/lolja/2
+Content-Type: application/json
+
+###
+DELETE http://localhost:2525/imposters/4572
+Content-Type: application/json

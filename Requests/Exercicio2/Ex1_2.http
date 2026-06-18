@@ -1,0 +1,335 @@
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "name":"Ex1_2",
+  "port":4571,
+  "protocol":"http",
+  "stubs": [
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 400,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "error": "Minimal Age Limit not reached"
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students",
+              "method": "POST"
+            }
+          },
+          {
+            "equals": {
+              "body": {
+                "idade": 8
+              }
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 404,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "error": "Curso dosent exist"
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students",
+              "method": "POST"
+            }
+          },
+          {
+            "contains": {
+                "body": {
+                  "curso": "NaoExiste"
+                }
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 201,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "mensagem": "Student Added Succesfully",
+                "id": 3
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students",
+              "method": "POST"
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 200,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": [
+                {
+                  "id": 1,
+                  "nome": "Andre",
+                  "idade": 18,
+                  "curso": "mecanica"
+                },
+                {
+                  "id": 2,
+                  "nome": "Gonçalo",
+                  "idade": 16,
+                  "curso": "Design"
+                }
+              ]
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students",
+              "method": "GET"
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 200,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "id": 1,
+                "nome": "Andre",
+                "idade": 18,
+                "curso": "mecanica"
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students/1",
+              "method": "GET"
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 200,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "mensagem": "Student Updated"
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students/1",
+              "method": "PUT"
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 404,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "erro": "Student Dosent Exist"
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students/2",
+              "method": "PUT"
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 200,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "mensagem": "Student Removed"
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "path": "/api/students/1",
+              "method": "DELETE",
+              "headers": {
+                "cargo": "Admin"
+              }
+            }
+          }
+        ]
+      },
+
+      {
+        "responses": [
+          {
+            "is": {
+              "statusCode": 403,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "erro": "Acess Denied. Only Admins can do this."
+              }
+            }
+          }
+        ],
+        "predicates": [
+          {
+            "equals": {
+              "method": "DELETE"
+            }
+          }
+        ]
+      }
+    ]
+}
+
+
+###
+GET http://localhost:4571/api/students
+Content-Type: application/json
+
+
+###
+GET http://localhost:4571/api/students/1
+Content-Type: application/json
+
+
+###
+POST http://localhost:4571/api/students
+Content-Type: application/json
+
+{
+  "nome":"Henrique",
+  "idade": 8,
+  "curso":"programação"
+}
+
+###
+POST http://localhost:4571/api/students
+Content-Type: application/json
+
+{
+  "nome": "Daniel",
+  "idade": 17,
+  "curso":"NaoExiste"
+}
+
+
+###
+POST http://localhost:4571/api/students
+Content-Type: application/json
+
+{
+  "nome": "Carlos",
+  "idade": 12,
+  "curso":"Robotica"
+}
+
+
+###
+PUT http://localhost:4571/api/students/1
+Content-Type: application/json
+
+{
+  "nome":"Andre",
+  "idade":18,
+  "curso":"mecanica"
+}
+
+
+###
+PUT http://localhost:4571/api/students/2
+Content-Type: application/json
+
+{
+  "nome": "Gonçalo",
+  "idade": 16,
+  "curso": "Design"
+
+}
+
+###
+DELETE http://localhost:4571/api/students/1
+Content-Type: application/json
+
+
+###
+DELETE http://localhost:4571/api/students/1
+Content-Type: application/json
+cargo: Admin
+
+###
+DELETE http://localhost:2525/imposters/4571
+Content-Type: application/json

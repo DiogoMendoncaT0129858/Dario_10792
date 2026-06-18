@@ -1,0 +1,229 @@
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "name":"Ex3_2",
+  "port":4573,
+  "protocol":"http",
+    "stubs": [
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 400,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                "error": "Invalid Value, Try again later"
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas",
+                "method": "POST"
+            }
+            },
+            {
+            "equals": {
+                "body": {
+                "quant": -5
+                }
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 201,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                "mensagem": "Reservation created nicely",
+                "id": 3
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas",
+                "method": "POST"
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 200,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": [
+                {
+                    "id": 1,
+                    "hotel": "B&D",
+                    "room": "1A",
+                    "quant": 1
+                },
+                {
+                    "id": 2,
+                    "nome": "B&D",
+                    "price": "43B",
+                    "quant": 3
+                },
+                {
+                    "id": 3,
+                    "nome": "B&D",
+                    "price": "88B",
+                    "quant": 2
+                }                
+                ]
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas",
+                "method": "GET"
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 200,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                    "id": 1,
+                    "hotel": "B&D",
+                    "room": "1A",
+                    "quant": 1
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas/1",
+                "method": "GET"
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 200,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                "mensagem": "New quantity updated",
+                "newQuant": 3
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas/1/info",
+                "method": "PUT"
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 404,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                "erro": "Reservation dosent exist or is written wrong"
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "contains": {
+                "path": "/api/reservas/999"
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 200,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                "mensagem": "Non Exisitng Reservation Deleted"
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas/2",
+                "method": "DELETE"
+            }
+            }
+        ]
+        },
+
+        {
+        "responses": [
+            {
+            "is": {
+                "statusCode": 400,
+                "headers": {
+                "Content-Type": "application/json"
+                },
+                "body": {
+                "erro": "Impossible to remove, Reservation is still in-use"
+                }
+            }
+            }
+        ],
+        "predicates": [
+            {
+            "equals": {
+                "path": "/api/reservas/1",
+                "method": "DELETE"
+            }
+            }
+        ]
+        }
+    ]
+}
