@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rent-A-Animatronic!</title>
+</head>
+<body>
+
+    <h1>Rent-A-Animatronic</h1>
+
+    <h2>Create a rentable</h2>
+    <form id="animatronicForm">
+        <label>Nome do Animatronic: </label><br>
+        <input type="text" id="TronicName"><br>
+        <label>Preço do Animatronic: </label><br>
+        <input type="text" id="TronicPrice"><br>
+        <input type="submit" id="submitForm">
+    </form>
+
+    <h2>See Catalogue</h2>
+    <div id="catalogue"></div>
+
+    <script>
+    requestApi();
+
+    function requestApi() {
+        fetch('http://localhost:5161/api/Animatronic')
+            .then(res => res.json())
+            .then(data => {
+                const contain = document.getElementById('catalogue');
+                contain.innerHTML = '';
+
+                data.forEach(tronic => {
+                    contain.innerHTML += `
+                        <div>
+                            <h3>${tronic.animatronicName}</h3>
+                            <p>Price: $${tronic.price} | Status: **${tronic.availability}**</p>
+                            <button onclick="toggleRent(${tronic.id})">Toggle Rent</button>
+                        </div>
+                        <hr>
+                    `;
+                });
+            }); 
+    }
+
+    document.getElementById('animatronicForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('TronicName').value;
+        const price = document.getElementById('TronicPrice').value;
+
+        fetch('http://localhost:5161/api/Animatronic', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                AnimatronicName: name,
+                price: parseFloat(price),
+                Availability: "Free" 
+            })
+        })
+        .then(() => {
+            requestApi(); 
+        });
+    });
+
+    function toggleRent(id) {
+        fetch(`http://localhost:5161/api/Animatronic/update/${id}`, {
+            method: 'PUT'
+        })
+        .then(() => {
+            requestApi(); 
+        });
+    }
+    </script>
+</body>
+</html>

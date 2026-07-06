@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "rentAAnimatronic.Controllers.AnimatronicController",
+    "Method": "PostAnimatronicRequest",
+    "RelativePath": "api/Animatronic",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "freddy",
+        "Type": "rentAAnimatronic.Models.tronicRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "rentAAnimatronic.Controllers.AnimatronicController",
+    "Method": "GetAnimatronicList",
+    "RelativePath": "api/Animatronic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "rentAAnimatronic.Controllers.AnimatronicController",
+    "Method": "UpdateAnimaTronic",
+    "RelativePath": "api/Animatronic/update/{Id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
