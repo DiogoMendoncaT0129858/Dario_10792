@@ -1,0 +1,60 @@
+[
+  {
+    "ContainingType": "RentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
+    "Method": "CreatePage",
+    "RelativePath": "CreatePage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tronic",
+        "Type": "RentAAnimatronicDeluxe.Models.tronicRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
+    "Method": "GetById",
+    "RelativePath": "SearchById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
+    "Method": "UpdateAvailability",
+    "RelativePath": "UpdateAvailability/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "preco",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "avail",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
