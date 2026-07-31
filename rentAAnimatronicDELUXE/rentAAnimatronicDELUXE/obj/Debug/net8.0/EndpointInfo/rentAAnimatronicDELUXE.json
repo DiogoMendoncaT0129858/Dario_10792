@@ -5,37 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/CreatePage": {
-      "post": {
-        "tags": [
-          "rentAnimatronic"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/tronicRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/tronicRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/tronicRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/SearchById/{id}": {
       "get": {
         "tags": [
@@ -59,7 +28,19 @@
         }
       }
     },
-    "/UpdateAvailability/{id}": {
+    "/SearchGeneric": {
+      "get": {
+        "tags": [
+          "rentAnimatronic"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/UpdateStatus/{id}": {
       "put": {
         "tags": [
           "rentAnimatronic"
@@ -73,21 +54,6 @@
               "type": "integer",
               "format": "int32"
             }
-          },
-          {
-            "name": "preco",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "avail",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
           }
         ],
         "responses": {
@@ -98,38 +64,5 @@
       }
     }
   },
-  "components": {
-    "schemas": {
-      "tronicRequest": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "ctg": {
-            "type": "string",
-            "nullable": true
-          },
-          "prc": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "desc": {
-            "type": "string",
-            "nullable": true
-          },
-          "available": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      }
-    }
-  }
+  "components": { }
 }

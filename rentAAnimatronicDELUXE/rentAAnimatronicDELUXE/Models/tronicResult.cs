@@ -1,7 +1,8 @@
 ﻿namespace rentAAnimatronicDELUXE.Models
 {
-    public class tronicRequest
+    public class tronicResult
     {
+        public int id { get; set; }
         public string? name { get; set; }
         public string? ctg { get; set; }
         public int prc { get; set; }

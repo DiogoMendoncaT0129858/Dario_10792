@@ -34,3 +34,6 @@ C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicD
 C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicDELUXE\obj\Debug\net8.0\rentAAnimatronicDELUXE.pdb
 C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicDELUXE\obj\Debug\net8.0\rentAAnimatronicDELUXE.genruntimeconfig.cache
 C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicDELUXE\obj\Debug\net8.0\ref\rentAAnimatronicDELUXE.dll
+C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicDELUXE\bin\Debug\net8.0\Polly.dll
+C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicDELUXE\bin\Debug\net8.0\Polly.Caching.Memory.dll
+C:\Users\diogo\Source\Repos\Dario_10792\rentAAnimatronicDELUXE\rentAAnimatronicDELUXE\bin\Debug\net8.0\Polly.Core.dll

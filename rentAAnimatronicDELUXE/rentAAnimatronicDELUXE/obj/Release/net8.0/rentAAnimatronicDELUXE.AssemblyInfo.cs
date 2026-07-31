@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("rentAAnimatronic")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("rentAAnimatronicDELUXE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53020461dbcdc8e959a3afaf170fd92896ae3b51")]
-[assembly: System.Reflection.AssemblyProductAttribute("rentAAnimatronic")]
-[assembly: System.Reflection.AssemblyTitleAttribute("rentAAnimatronic")]
+[assembly: System.Reflection.AssemblyProductAttribute("rentAAnimatronicDELUXE")]
+[assembly: System.Reflection.AssemblyTitleAttribute("rentAAnimatronicDELUXE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.

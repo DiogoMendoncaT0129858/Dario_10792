@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("rentAAnimatronicDELUXE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c9856020eb97f4783f9431260ece7443a354807")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53020461dbcdc8e959a3afaf170fd92896ae3b51")]
 [assembly: System.Reflection.AssemblyProductAttribute("rentAAnimatronicDELUXE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("rentAAnimatronicDELUXE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

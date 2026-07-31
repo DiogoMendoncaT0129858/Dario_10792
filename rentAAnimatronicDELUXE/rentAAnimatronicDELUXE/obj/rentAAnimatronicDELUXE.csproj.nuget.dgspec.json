@@ -50,6 +50,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Polly": {
+              "target": "Package",
+              "version": "[8.7.0, )"
+            },
+            "Polly.Caching.Memory": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

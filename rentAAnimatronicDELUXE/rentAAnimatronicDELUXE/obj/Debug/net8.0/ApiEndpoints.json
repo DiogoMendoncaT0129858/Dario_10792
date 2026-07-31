@@ -1,22 +1,6 @@
 [
   {
-    "ContainingType": "RentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
-    "Method": "CreatePage",
-    "RelativePath": "CreatePage",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "tronic",
-        "Type": "RentAAnimatronicDeluxe.Models.tronicRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
+    "ContainingType": "rentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
     "Method": "GetById",
     "RelativePath": "SearchById/{id}",
     "HttpMethod": "GET",
@@ -32,9 +16,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
-    "Method": "UpdateAvailability",
-    "RelativePath": "UpdateAvailability/{id}",
+    "ContainingType": "rentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
+    "Method": "GetGeneric",
+    "RelativePath": "SearchGeneric",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "rentAAnimatronicDeluxe.Controllers.rentAnimatronicController",
+    "Method": "UpdateStatus",
+    "RelativePath": "UpdateStatus/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -43,16 +37,6 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "preco",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "avail",
-        "Type": "System.Boolean",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []

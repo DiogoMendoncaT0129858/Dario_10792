@@ -1,71 +1,102 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RentAAnimatronicDeluxe.Models;
+using rentAAnimatronicDELUXE.Models;
+using System.Net.Http.Json;
+using Polly;
+using Polly.Caching;
+using Polly.Caching.Memory;
 
-namespace RentAAnimatronicDeluxe.Controllers
+namespace rentAAnimatronicDeluxe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class rentAnimatronicController : ControllerBase
     {
-        public static List<tronicRequest> listaTronic = new List<tronicRequest>();
-        /*{
-            new tronicRequest
-            {
-                id = 1,
-                name = "Fredbear",
-                ctg = "Relic",
-                prc = 5000,
-                desc = "The original star of the show! Big yellow and lovely, Fredbear",
-                available = true
-            },
-            new tronicRequest
-            {
-                id = 2,
-                name = "SpringBonnie",
-                ctg = "Relic",
-                prc = 5000,
-                desc = "Fredbear's best friend and a cracker at guittar, Springbonnie!",
-                available = true
-            }
-        };*/
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly AsyncCachePolicy _policy;
 
-        [HttpPost("/CreatePage")]
-        public JsonResult CreatePage(tronicRequest tronic)
+        public rentAnimatronicController(IHttpClientFactory httpClientFactory, AsyncCachePolicy policy)
         {
-            var added = new tronicRequest
-            {
-                id = listaTronic.Count + 1,
-                name = tronic.name,
-                ctg = tronic.ctg,
-                prc = tronic.prc,
-                desc = tronic.desc,
-                available = tronic.available
-            };
-            listaTronic.Add(added);
-            return new JsonResult(added);
+            _httpClientFactory = httpClientFactory;
+            _policy = policy;
         }
 
         [HttpGet("/SearchById/{id}")]
-        public JsonResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var specific = listaTronic.FirstOrDefault(x => x.id == id);
-            return new JsonResult(specific);
-        }
+            var context = new Context("animatronic-" + id +"");
 
-        [HttpPut("/UpdateAvailability/{id}")]
-        public JsonResult UpdateAvailability(int id, int preco, bool avail)
-        {
-            var found = listaTronic.FirstOrDefault(x => x.id == id);
-
-            if (found == null)
+            var verySpecific = await _policy.ExecuteAsync(async (ctx) =>
             {
-                return new JsonResult(NotFound("Id Not Found, Try Again"));
+                var client = _httpClientFactory.CreateClient("InventoryCheck");
+                var response = await client.GetAsync("/inventory");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var specific = await response.Content.ReadFromJsonAsync<List<tronicResult>>();
+                return specific?.FirstOrDefault(x => x.id == id);
+            }, context);
+
+            if (verySpecific == null)
+            {
+                return NotFound("Animatronic Nao Existe");
             }
 
-            found.prc = preco;
-            found.available = avail;
+            return Ok(verySpecific);
+        }
 
-            return new JsonResult(found);
+        [HttpGet("/SearchGeneric")]
+        public async Task<IActionResult> GetGeneric()
+        {
+            var context = new Context("inventoryGeneric");
+            //Esta linha debaixo diz ao Polly para esperar e ver se tem a memora do GET ja ter sido feito; 
+            //Se sim ele ignora o codigo e faz o que vem depois. Se nao ele executa o codigo.
+            var listFound = await _policy.ExecuteAsync(async (ctx) =>
+            {
+                var client = _httpClientFactory.CreateClient("InventoryCheck");
+                var response = await client.GetAsync("/inventory");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                return await response.Content.ReadFromJsonAsync<List<tronicResult>>();
+            }, context);
+
+            if (listFound == null)
+            {
+                return StatusCode(502, "Resposta invalida");
+            }
+
+            return Ok(listFound);
+        }
+
+        [HttpPut("/UpdateStatus/{id}")]
+        public async Task<IActionResult> UpdateStatus(int id)
+        {
+            var client = _httpClientFactory.CreateClient("InventoryCheck");
+
+            var response = await client.PutAsync("/inventory/unavailable", null);
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, "Não foi possível contactar o imposter.");
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return StatusCode((int)response.StatusCode, "Não foi possível encontrar o animatronico.");
+            }
+;           var found = await response.Content.ReadFromJsonAsync<List<tronicResult>>();
+            if (found == null)
+            {
+                return NotFound("Animatronic nao existe");
+            }
+
+            var foundNUpdated = found.FirstOrDefault(x => x.id == id);
+
+            return Ok(foundNUpdated);
         }
     }
 }
