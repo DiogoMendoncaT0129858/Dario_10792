@@ -8,6 +8,14 @@ Content-Type: application/json
    "protocol": "http",
    "stubs": [
       {
+         "predicates": [
+            {
+               "equals": {
+                  "path": "/inventory",
+                  "method": "GET"
+               }
+            }
+         ],
          "responses": [
             {
                "is": {
@@ -21,7 +29,7 @@ Content-Type: application/json
                         "name": "Fredbear",
                         "ctg": "Relic",
                         "prc": 5000,
-                        "desc": "The original star of the show! Big yellow and lovely, Fredbear",
+                        "desc": "The Ol' star of the show! Big yellow and lovely, Fredbear",
                         "available": true
                      },
                      {
@@ -31,21 +39,159 @@ Content-Type: application/json
                         "prc": 5000,
                         "desc": "Fredbear's best friend and a cracker at guittar, Springbonnie!",
                         "available": true
+                     },
+                     {
+                        "id": 3,
+                        "name": "Freddy",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The BIG star of the show! Freddy Fazbear!",
+                        "available": true
+                     },
+                     {
+                        "id": 4,
+                        "name": "Bonnie",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The Second star, the guittarist",
+                        "available": true
+                     },
+                     {
+                        "id": 5,
+                        "name": "Chica",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The Baker of the group!",
+                        "available": true
+                     },
+                     {
+                        "id": 6,
+                        "name": "Foxy",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The Pirate Fox!",
+                        "available": true
+                     },
+                     {
+                        "id": 7,
+                        "name": "Happy Frog",
+                        "ctg": "Modern",
+                        "prc": 300,
+                        "desc": "The Happiest Frog",
+                        "available": true
+                     },
+                     {
+                        "id": 8,
+                        "name": "Mr. Hippo",
+                        "ctg": "Modern",
+                        "prc": 190,
+                        "desc": "Wise Hippo",
+                        "available": true
+                     },
+                     {
+                        "id": 9,
+                        "name": "PigPatch",
+                        "ctg": "Modern",
+                        "prc": 320,
+                        "desc": "A Smart, Hard Workin' Farm Pig",
+                        "available": true
                      }
                   ]
                }
             }
-         ],
+         ]
+      },
+      {
          "predicates": [
             {
-               "and": [
-                  {
-                     "equals": {
-                        "path": "/inventory",
-                        "method": "GET"
-                      }
-                  }
-               ]
+               "equals": {
+                  "path": "/inventory/unavailable",
+                  "method": "PUT"
+               }
+            }
+         ],
+         "responses": [
+            {
+               "is": {
+                  "statusCode": 200,
+                  "headers": {
+                     "Content-Type": "application/json"
+                  },
+                  "body": [
+                     {
+                        "id": 1,
+                        "name": "Fredbear",
+                        "ctg": "Relic",
+                        "prc": 5000,
+                        "desc": "The Ol' star of the show! Big yellow and lovely, Fredbear",
+                        "available": false
+                     },
+                     {
+                        "id": 2,
+                        "name": "SpringBonnie",
+                        "ctg": "Relic",
+                        "prc": 5000,
+                        "desc": "Fredbear's best friend and a cracker at guittar, Springbonnie!",
+                        "available": false
+                     },
+                     {
+                        "id": 3,
+                        "name": "Freddy",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The BIG star of the show! Freddy Fazbear!",
+                        "available": false
+                     },
+                     {
+                        "id": 4,
+                        "name": "Bonnie",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The Second star, the guittarist",
+                        "available": false
+                     },
+                     {
+                        "id": 5,
+                        "name": "Chica",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The Baker of the group!",
+                        "available": false
+                     },
+                     {
+                        "id": 6,
+                        "name": "Foxy",
+                        "ctg": "Vintage",
+                        "prc": 1000,
+                        "desc": "The Pirate Fox!",
+                        "available": false
+                     },
+                     {
+                        "id": 7,
+                        "name": "Happy Frog",
+                        "ctg": "Modern",
+                        "prc": 300,
+                        "desc": "The Happiest Frog",
+                        "available": false
+                     },
+                     {
+                        "id": 8,
+                        "name": "Mr. Hippo",
+                        "ctg": "Modern",
+                        "prc": 190,
+                        "desc": "Wise Hippo",
+                        "available": false
+                     },
+                     {
+                        "id": 9,
+                        "name": "PigPatch",
+                        "ctg": "Modern",
+                        "prc": 320,
+                        "desc": "A Smart, Hard Workin' Farm Pig",
+                        "available": false
+                     }
+                  ]
+               }
             }
          ]
       }
@@ -57,4 +203,4 @@ GET http://localhost:1987/inventory
 Content-Type: application/json
 
 ###
-DELETE http://localhost:2525/impostersimposters/1987
+DELETE http://localhost:2525/imposters/1987
