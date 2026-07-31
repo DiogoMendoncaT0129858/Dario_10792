@@ -1,0 +1,60 @@
+###
+POST http://localhost:2525/imposters
+Content-Type: application/json
+ 
+{
+   "name": "Inventory",
+   "port": 1987,
+   "protocol": "http",
+   "stubs": [
+      {
+         "responses": [
+            {
+               "is": {
+                  "statusCode": 200,
+                  "headers": {
+                     "Content-Type": "application/json"
+                  },
+                  "body": [
+                     {
+                        "id": 1,
+                        "name": "Fredbear",
+                        "ctg": "Relic",
+                        "prc": 5000,
+                        "desc": "The original star of the show! Big yellow and lovely, Fredbear",
+                        "available": true
+                     },
+                     {
+                        "id": 2,
+                        "name": "SpringBonnie",
+                        "ctg": "Relic",
+                        "prc": 5000,
+                        "desc": "Fredbear's best friend and a cracker at guittar, Springbonnie!",
+                        "available": true
+                     }
+                  ]
+               }
+            }
+         ],
+         "predicates": [
+            {
+               "and": [
+                  {
+                     "equals": {
+                        "path": "/inventory",
+                        "method": "GET"
+                      }
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
+
+###
+GET http://localhost:1987/inventory
+Content-Type: application/json
+
+###
+DELETE http://localhost:2525/impostersimposters/1987
